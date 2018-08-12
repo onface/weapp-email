@@ -20,7 +20,7 @@
 </template>
 
 <script>
-// import card from '@/components/card'
+import Go from "../../m/go/index"
 import request from "../../m/request/index"
 export default {
   data () {
@@ -38,12 +38,12 @@ export default {
   methods: {
       handleLogin: function () {
           const self = this
-          wx.showLoading()
           request({
               url: '/login',
               method: 'POST',
               data: self.form,
               success: function (res) {
+                  console.log(res)
                   if(res.data.type === 'fail') {
                       wx.showToast({
                           icon: 'none',
@@ -55,16 +55,10 @@ export default {
                           title: 'Is logged in'
                       })
                       wx.setStorageSync('user', JSON.stringify(self.form))
+                      setTimeout(function () {
+                          Go('/inbox')
+                      }, 300)
                   }
-              },
-              fail: function () {
-                  wx.showToast({
-                      icon: 'none',
-                      title: 'network errors'
-                  })
-              },
-              complete: function () {
-                  wx.hideLoading()
               }
           })
       }
