@@ -32,13 +32,13 @@ export default {
 
   },
   created () {
-      request({
-          url: '/inbox',
-          type: 'GET',
-          success: function (res) {
-              console.log(res)
-          }
-      })
+      // request({
+      //     url: '/inbox',
+      //     type: 'GET',
+      //     success: function (res) {
+      //         console.log(res)
+      //     }
+      // })
   }
 }
 </script>

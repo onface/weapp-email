@@ -13,7 +13,10 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "imap": "^0.8.19",
+    "imap-manager": "^0.2.1",
+    "imap-open-box": "^1.0.1",
     "mailparser": "^2.3.2",
+    "mime-lib": "^0.5.3",
     "mpvue": "^1.0.11",
     "nodemailer": "^4.6.7"
   },
