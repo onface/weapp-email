@@ -2,13 +2,18 @@
     <div>
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd">
-                <div class="weui-media-box weui-media-box_text">
-                    <div class="weui-media-box__title weui-media-box__title_in-text">标题一</div>
-                    <div class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</div>
-                </div>
-                <div class="weui-media-box weui-media-box_text">
-                    <div class="weui-media-box__title weui-media-box__title_in-text">标题二</div>
-                    <div class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</div>
+                <div class="weui-media-box weui-media-box_text" v-for="(item, index) in data">
+                    <div @click="handleShowEmail(item.attributes.uid)" >
+                        <div class="weui-media-box__title weui-media-box__title_in-text">{{item.header.subject}}</div>
+                        <div class="weui-media-box__desc">{{item.header.from}}</div>
+                    </div>
+                    <div class="emailcnt" v-if="showEmail === item.attributes.uid">
+                        <wxParse :content="item.content.text.html" />
+                        <div class="emailcnt-tool">
+                            <button class="weui-btn" type="primary" @click="writeEmail(item.header.from[0])" >回复</button>
+                            <button class="weui-btn" @click="showEmail = ''" type="default">关闭</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -16,33 +21,64 @@
 </template>
 
 <script>
-// import card from '@/components/card'
+import wxParse from 'mpvue-wxparse'
 import request from "../../m/request/index"
+import Go from "../../m/go/index"
 export default {
   data () {
     return {
-
+        data: [],
+        showEmail: ''
     }
   },
 
   components: {
-
+      wxParse
   },
   methods: {
-
+      handleShowEmail: function (uid) {
+          this.showEmail = uid
+      },
+      writeEmail: function (from) {
+          this.showEmail = ''
+          Go('/write', {
+              data: {
+                  to: from
+              }
+          })
+      }
   },
-  created () {
-      // request({
-      //     url: '/inbox',
-      //     type: 'GET',
-      //     success: function (res) {
-      //         console.log(res)
-      //     }
-      // })
+  onLoad () {
+      const self = this
+      request({
+          url: '/inbox',
+          method: 'GET',
+          success: function (res) {
+              if (res.data.type === 'fail') {
+                  wx.showToast({
+                      title: res.msg
+                  })
+              }
+              else {
+                  self.data = res.data.data
+              }
+          }
+      })
   }
 }
 </script>
 
 <style scoped>
-
+.emailcnt {
+    position: fixed;
+    z-index: 10;
+    top:0;left:0;width: 100%;height: 100%;
+    background-color: white;
+    overflow-y: auto;
+    border:2rpx solid #eee;
+    border-radius: .3em;
+}
+.emailcnt-tool {
+    padding: 30rpx;
+}
 </style>

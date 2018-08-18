@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/inbox/main"
+    "pages/inbox/main",
+    "pages/write/main"
 ],
   "window": {
     "backgroundTextStyle": "light",
