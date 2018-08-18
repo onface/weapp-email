@@ -9,5 +9,18 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "weapp-email",
     "navigationBarTextStyle": "black"
+ },
+ "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/main",
+      "text": "账号"
+    }, {
+      "pagePath": "pages/inbox/main",
+      "text": "收件箱"
+    },
+    {
+     "pagePath": "pages/write/main",
+     "text": "写邮件"
+   }]
   }
 }
