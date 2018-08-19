@@ -19,7 +19,7 @@
         <div class="weui-cells weui-cells_after-title">
           <div class="weui-cell">
               <div class="weui-cell__bd">
-                  <textarea class="weui-textarea" v-model="content" placeholder="请输入邮件内容" style="height: 3.3em" />
+                  <textarea class="weui-textarea" v-model="content" placeholder="请输入邮件内容" style="height: 15em" />
               </div>
           </div>
         </div>
@@ -40,10 +40,13 @@ export default {
     }
   },
   onLoad: function (option) {
-      if (option.to) {
-        this.to = option.to.replace(/(^.*<|>.*$)/g, '')
-        this.disabled = 'disabled'
+      if (wx.getStorageSync('go')) {
+          var to = wx.getStorageSync('go').to
+          this.to = to.replace(/(^.*<|>.*$)/g, '')
+          this.disabled = 'disabled'
+          wx.removeStorageSync('go')
       }
+
   },
   components: {
 

@@ -43,7 +43,6 @@ export default {
               method: 'POST',
               data: self.form,
               success: function (res) {
-                  console.log(res)
                   if(res.data.type === 'fail') {
                       wx.showToast({
                           icon: 'none',
