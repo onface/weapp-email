@@ -33,13 +33,14 @@ import request from "../../m/request/index"
 export default {
   data () {
     return {
-        subject:'',
-        to: '',
-        content: '',
+        subject:'', // 电子邮件标题
+        to: '', // 收件人电子邮件地址
+        content: '', // 电子邮件内容
         disabled: ''
     }
   },
   onLoad: function (option) {
+    // 如果有收件人参数时，自动填充收件人电子邮件地址
       if (option.to) {
         this.to = option.to.replace(/(^.*<|>.*$)/g, '')
         this.disabled = 'disabled'
@@ -67,7 +68,7 @@ export default {
                   }
                   else {
                       wx.showToast({
-                          title: 'sent successfully'
+                          title: 'sent success！'
                       })
                   }
               }

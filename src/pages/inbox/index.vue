@@ -21,6 +21,7 @@
 </template>
 
 <script>
+// 插件wxParse用于显示具体邮件内容
 import wxParse from 'mpvue-wxparse'
 import request from "../../m/request/index"
 import Go from "../../m/go/index"
@@ -36,9 +37,11 @@ export default {
       wxParse
   },
   methods: {
+      // 显示选中电子邮件具体内容
       handleShowEmail: function (uid) {
           this.showEmail = uid
       },
+      // 跳转至创建邮件页面，并附带参数回复人邮件地址
       writeEmail: function (from) {
           this.showEmail = ''
           Go('/write', {
@@ -50,6 +53,7 @@ export default {
   },
   onLoad () {
       const self = this
+      // 获取收件箱列表
       request({
           url: '/inbox',
           method: 'GET',

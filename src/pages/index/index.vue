@@ -54,7 +54,10 @@ export default {
                       wx.showToast({
                           title: 'Is logged in'
                       })
-                      wx.setStorageSync('user', JSON.stringify(self.form))
+                      wx.setStorageSync(
+                        'user'
+                        JSON.stringify(self.form)
+                      )
                       setTimeout(function () {
                           Go('/inbox')
                       }, 300)
