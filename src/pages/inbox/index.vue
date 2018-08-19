@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="weui-btn get-new-btn" type="primary" @click="getNew">收信</button>
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_text" v-for="(item, index) in data">
@@ -49,25 +50,29 @@ export default {
                   to: from
               }
           })
+      },
+      // 获取收件箱列表
+      getNew: function () {
+          const self = this
+          request({
+              url: '/inbox',
+              method: 'GET',
+              success: function (res) {
+                  if (res.data.type === 'fail') {
+                      wx.showToast({
+                          title: res.msg
+                      })
+                  }
+                  else {
+                      self.data = res.data.data.reverse()
+                  }
+              }
+          })
       }
   },
   onLoad () {
-      const self = this
-      // 获取收件箱列表
-      request({
-          url: '/inbox',
-          method: 'GET',
-          success: function (res) {
-              if (res.data.type === 'fail') {
-                  wx.showToast({
-                      title: res.msg
-                  })
-              }
-              else {
-                  self.data = res.data.data
-              }
-          }
-      })
+     const self = this
+     self.getNew()
   }
 }
 </script>
@@ -84,5 +89,8 @@ export default {
 }
 .emailcnt-tool {
     padding: 30rpx;
+}
+.get-new-btn {
+    margin: 1em;
 }
 </style>
