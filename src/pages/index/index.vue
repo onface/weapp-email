@@ -54,7 +54,7 @@ export default {
                           title: 'Is logged in'
                       })
                       wx.setStorageSync(
-                        'user'
+                        'user',
                         JSON.stringify(self.form)
                       )
                       setTimeout(function () {

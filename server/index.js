@@ -33,11 +33,11 @@ app.use(function (req, res, next) {
 })
 function createImap  (req, callback) {
     let options = {
-      host: 'imap.' + req.body.$domain,
-      port: 993,
-      tls: true,
-      authTimeout: 10000,
-      connTimeout: 20000
+      host: 'imap.' + req.body.$domain, // 配置IMAP路由
+      port: 993, // 设定服务器路由端口
+      tls: true, // 传输层安全协议
+      authTimeout: 10000, // 设定超时时间范围
+      connTimeout: 20000 // 设定超时时间范围
     }
     var mailserver = ImapManger(options);
     callback(mailserver)
