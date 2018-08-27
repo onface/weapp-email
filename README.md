@@ -23,7 +23,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## folders
 
-`
+```bash
 - build // 将开发代码构建成生产环境可运行代码的编译程序
 - config // 开发环境和生产环境的属性变量配置
 - dist // 编译后的代码
@@ -40,4 +40,4 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 - package.json // 定义了这个项目所需要的各种模块，以及项目的配置信息
 - index.html // 页面入口
 - README.md // 项目说明以及开发建立说明
-`
+```
